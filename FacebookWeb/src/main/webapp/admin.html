@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="css/SignUp.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+<title>admin page</title>
+<script>
+	$(document)
+			.ready(
+					function() {
+						var otable = $('#admin_table')
+								.DataTable(
+										{
+											"processing" : true,
+											"pageLength" : 3,
+											"ajax" : {
+												"url" : "UserServlet?method=getAdminData",
+												"datasrc" : "data",
+												"type" : "get"
+											},
+											"columns" : [
+													{
+														"data" : "name"
+													},
+													{
+														"data" : "email"
+													},
+													{
+														"data" : "password"
+													},
+													{
+														"data" : "gender"
+													},
+													{
+														"data" : "age"
+													},
+													{
+														"data" : "address"
+													},
+													{
+														"data" : "status",
+														render : function(data,
+																type, row, meta) {
+															
+															if(row.status=="ACTIVE"){
+																return "<b><p style='"+"color:green'>"
+																+ row.status
+																+ "</p></b>";
+															}else{
+																return "<b><p style='"+"color:red'>"
+																+ row.status
+																+ "</p></b>";
+															}
+															
+														}
+													},
+													{
+														"data" : "",
+														render : function(data,
+																type, row, meta) {
+															 return '<span onclick="blockUser(\'' + row.email + '\')" title="Block User" style="color:red"><i class="fas fa-user-minus"></i><span> <span onclick="unBlockUser(\'' + row.email + '\')" style="color:green; margin-left:10px;" title="Unblock User"><i class="fas fa-user-plus"></i><span>'; 
+														}
+													}
+
+											],
+											columnDefs : [ {
+												width : 100,
+											} ],
+										});
+					});
+	
+	
+	function blockUser(email){
+		event.stopPropagation();
+		location.href="UserServlet?method=blockUser&email="+email;
+	}
+	
+	function unBlockUser(email){
+		event.stopPropagation();
+		location.href="UserServlet?method=unBlockUser&email="+email;
+	}
+</script>
+</head>
+<body>
+
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+			<div class="container-fluid">
+				<div style="margin-left: 20px">
+					<a class="nav-link" href="index.html"><img
+						src="asset/facebook.png" alt="facebook"></a>
+				</div>
+				<div style="margin-left: 20px">
+					<h3 style="color: white;">ADMIN CONTROL</h3>
+				</div>
+				<div style="margin-right: 50px">
+					<div class="collapse navbar-collapse" id="navbarExample01">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item active"><a class="nav-link"
+								aria-current="page" href="index.html" style="color: white;"><b>Home</b></a>
+							</li>
+							<!-- <li class="nav-item"><a class="nav-link"
+								href="UserServlet?method=logout" style="color: white;"><b>Log
+										out</b></a></li> -->
+							<li class="nav-item">
+								<form action="UserServlet?method=logout" method="post">
+									<label for="logout" class="nav-link" style="color: white;"><b>Log out</b></label>
+									<input id="logout" type="submit" style="display:none">
+								</form>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+		</nav>
+	</header>
+
+
+	<div style="margin: 10px auto; width: 90%">
+		<table id="admin_table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Password</th>
+					<th>Gender</th>
+					<th>age</th>
+					<th>address</th>
+					<th>status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+		</table>
+
+	</div>
+	
+	
+	
+	<div style="margin: 70px 500px auto; width: 90%">
+		<h3 style="color:blue">upload Advertisement</h3>
+		<form class="create-post" method="post" action="UserServlet?method=createAdvertisement" enctype="multipart/form-data">
+			<label for="file-type"><img src="asset/upload.png" style="width:60px; height:60px;margin-left:100px;"></label>
+			<input type="file" id="file-type" style="display:none"  name="image" >
+			<input type="submit" class="btn btn-primary" value="post" style="margin-top:50px;margin-left:-60px;">
+		</form>
+	</div>
+
+
+</body>
+</html>

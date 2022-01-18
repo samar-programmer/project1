@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Profile</title>
+<link rel="stylesheet" href="css/SignUp.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+function loadViewData(){
+	fetch('UserServlet?method=viewProfile')
+	  .then(response => response.json())
+	  .then(data => {
+		  console.log(data);
+		  document.getElementById('name').innerHTML="<b>"+data.name+"</b>";
+		  document.getElementById('email').innerHTML="<b>"+data.email+"</b>";
+		  document.getElementById('originalEmail').value=data.email;
+		  document.getElementById('password').innerHTML="<b>"+data.password+"</b>";
+		  document.getElementById('gender').innerHTML="<b>"+data.gender+"</b>";
+		  document.getElementById('age').innerHTML="<b>"+data.age+"</b>";
+		  document.getElementById('address').innerHTML="<b>"+data.address+"</b>";
+		  
+	  });
+}  
+
+
+
+</script>
+
+<style>
+
+p{
+color:#0072ff;
+}
+
+
+
+.gradient-blue1 {
+	/* background: linear-gradient(to  bottom, #00c6ff, #0072ff); */
+	background: #0072ff;
+    min-height: 100%;
+    margin: 0;
+    /* overflow:hidden; */
+    /* object-fit: fill; 
+      */
+}
+
+</style>
+</head>
+<body onload="loadViewData()"  class="gradient-blue1">
+
+
+<section class="Container-fluid py-5 h-100">
+		<div class="">
+			<div class="row justify-content-center align-items-center  h-100">
+				<div class="col-12 col-lg-7 col-xl-6">
+					<div class="card shadow-2-strong card-registration"
+						style="border-radius: 15px;">
+						<div class="card-bovdy p-3 p-md-4">
+							<h3 class="mb-3 pb-2 pb-md-0 mb-md-3" style="color:brown">Edit Profile Details </h3>
+
+								<div class="row">
+									<div class="col-md-6 mb-0">
+										<div class="form-outline">
+												<h5 class="mb-3 pb-2 pb-md-0 mb-md-3">Name : </h5>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+										<p id="name"></p>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+										<div class="form-outline">
+												<h5 class="mb-3 pb-2 pb-md-0 mb-md-3">Email : </h5>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+										<p id="email"></p>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+										<div class="form-outline">
+												<h5 class="mb-3 pb-2 pb-md-0 mb-md-3">Password : </h5>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+										<p id="password"></p>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+										<div class="form-outline">
+												<h5 class="mb-3 pb-2 pb-md-0 mb-md-3">Gender : </h5>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+										<p id="gender"></p>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+										<div class="form-outline">
+												<h5 class="mb-3 pb-2 pb-md-0 mb-md-3">Age : </h5>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+										<p id="age"></p>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+										<div class="form-outline">
+												<h5 class="mb-3 pb-2 pb-md-0 mb-md-3">Address : </h5>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+										<p id="address"></p>
+									</div>
+								</div>
+								<h3 style="color:brown">Edit your Details below ...</h3>
+								<form action="UserServlet?method=editProfile" method="post">
+								 <input type="hidden" id="originalEmail" name="originalEmail">
+								<div class="row">
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="firstName" name="firstName"
+												class="form-control form-control-sm" /> <label
+												class="form-label" for="firstName">First Name</label>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="lastName" name="lastName"
+												class="form-control form-control-sm" /> <label
+												class="form-label" for="lastName">Last Name</label>
+										</div>
+
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="password" id="password" name="password"
+												class="form-control form-control-sm" /> <label
+												class="form-label" for="password">Password</label>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="confirm_password"
+												class="form-control form-control-sm" /> <label
+												class="form-label" for="confirm_password">Confirm Password</label>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-0 d-flex align-items-center">
+
+										<div class="form-outline datepicker w-100">
+											<input type="text" class="form-control form-control-sm" name="age"
+												id="age" /> <label
+												for="birthdayDate" class="form-label">DOB</label>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+
+										<h6 class="mb-0 pb-1">Gender:</h6>
+
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio"
+												value="female"  name="gender"
+												 /> <label
+												class="form-check-label" for="femaleGender">Female</label>
+										</div>
+
+										<div class="form-check form-check-inline">
+											<input class="" type="radio"
+												value="male" name="gender" />
+											<label class="form-check-label" for="maleGender">Male</label>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="address" name="address"
+												class="form-control form-control-sm" /> <label
+												class="form-label" for="address">Address</label>
+										</div>
+
+									</div>
+									</div>
+								
+
+								<div class="mt-1 pt-0 text-center">
+									<input class="btn btn-primary" type="submit"
+										value="Submit" />
+										<input class="btn btn-primary" type="reset"
+										value="Reset" />
+								</div>
+
+							</form>
+
+								<div class="mt-1 pt-0 text-center">
+									<h5 style="color:brown">Back to Timeline   <a class="menu-item" href="UserServlet?method=login">Click here..</a></h5>
+								</div>
+
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign Up Page</title>
+<link rel="stylesheet" href="css/SignUp.css">
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="script/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+function checkPassword(){
+	var password = document.getElementById('password').value;
+	var confirm_password = document.getElementById('confirm_password').value;
+	console.log(password)
+	if(password == confirm_password){
+		debugger
+		document.getElementById('errorDiv').style.display='none'
+		//return true;
+	}else{
+		document.getElementById('errorDiv').style.display='block'
+			document.getElementById("password").focus();
+		document.getElementById('errorValidation').innerHTML = "* Password and confirm password should be same";  
+		//return false;
+	}
+}
+</script>
+
+</head>
+<body class="gradient-blue">
+	<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <div style="margin-left:20px">
+      	<a class="nav-link" href="index.html"><img src="asset/facebook.png" alt="facebook"></a>
+      </div>
+      <div style="margin-right:50px">
+      <div class="collapse navbar-collapse" id="navbarExample01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.html">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Sign in</a>
+          </li>
+          <!-- <li class="nav-item">
+           <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          </li> -->
+        </ul>
+      </div>
+      
+      </div>
+     
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Jumbotron -->
+  <!-- <div class="p-5 text-center bg-light">
+    <h1 class="mb-3">Heading</h1>
+    <h4 class="mb-3">Subheading</h4>
+    <a class="btn btn-primary" href="" role="button">Call to action</a>
+  </div> -->
+  <!-- Jumbotron -->
+</header>
+	<section class="">
+		<div class="Container py-5 h-100 mt-3">
+			<div class="row justify-content-center align-items-center  h-100">
+				<div class="col-12 col-lg-7 col-xl-6">
+					<div class="card shadow-2-strong card-registration"
+						style="border-radius: 15px;">
+						<div class="card-bovdy p-3 p-md-4">
+							<h3 class="mb-3 pb-2 pb-md-0 mb-md-3">Sing up.. </h3> 
+							<div id="errorDiv">	<b><p style="color:red"id="errorValidation"></p></b> </div>
+							<form action="UserServlet?method=register" method="post">
+							<!-- <form action="" method="post"> -->
+							
+						
+							
+								<div class="row">
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="firstName" name="firstName"
+												class="form-control form-control-sm" required/> <label
+												class="form-label" for="firstName">First Name</label>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="lastName" name="lastName"
+												class="form-control form-control-sm" required/> <label
+												class="form-label" for="lastName">Last Name</label>
+										</div>
+
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="password" id="password" name="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+												class="form-control form-control-sm" required/> <label
+												class="form-label" for="password">Password</label>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="text" id="confirm_password"
+												class="form-control form-control-sm" onblur="checkPassword()" required/> <label
+												class="form-label" for="confirm_password" >Confirm Password</label>
+										</div>
+										
+										
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-0 d-flex align-items-center">
+
+										<div class="form-outline datepicker w-100">
+											<input type="number" class="form-control form-control-sm" name="age"
+												id="age" required/> <label
+												for="birthdayDate" class="form-label">Age</label>
+										</div>
+
+									</div>
+									<div class="col-md-6 mb-0">
+
+										<h6 class="mb-0 pb-1">Gender:</h6>
+
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio"
+												value="female"  name="gender"
+												 /> <label
+												class="form-check-label" for="femaleGender">Female</label>
+										</div>
+
+										<div class="form-check form-check-inline">
+											<input class="" type="radio"
+												value="male" name="gender" />
+											<label class="form-check-label" for="maleGender">Male</label>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-0">
+
+										<div class="form-outline">
+											<input type="email" id="email" name="email"
+												class="form-control form-control-sm" required/> <label
+												class="form-label" for="emailAddress" >Email</label>
+										</div>
+
+									</div>
+									
+									<!-- <div class="col-md-2 mb-0 pb-2 ">
+										<div class="form-outline">
+											<input type="tel" id="countryCode"
+												class="form-control form-control-sm" /> <label
+												class="form-label" for="countryCode">code</label>
+										
+										</div>
+									</div> -->
+									<div class="col-md-6 mb-0">
+										
+											<div class="form-outline">
+											<input type="tel" id="phoneNumber" name="address"
+												class="form-control form-control-sm" required/> <label
+												class="form-label" for="address">Address</label>
+										
+										</div>
+										
+
+									</div>
+									</div>
+									
+									<!-- <div class="row  text-center">
+										<b><p class="text-center" style="margin-left:140px;">Upload Photo :</p></b>  <input type="file" name="image" id="image">
+									</div> -->
+								
+
+								<div class="mt-1 pt-0 text-center">
+									<input class="btn btn-primary" type="submit"
+										value="Submit" />
+										<input class="btn btn-primary" type="reset"
+										value="Reset" />
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+</body>
+</html>

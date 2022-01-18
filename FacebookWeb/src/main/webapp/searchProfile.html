@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search Profile</title>
+<link rel="stylesheet" href="css/SignUp.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+function loadSearchProfiles(){
+	var dataInsert="" ;
+	fetch('UserServlet?method=searchProfiles')
+	  .then(response => response.json())
+	  .then(data => {
+		  console.log(data);
+		  data.forEach((item,index)=>{
+			  dataInsert=dataInsert+"<b><p>"+item.name+"</p></b><br>";
+		  });
+		  document.getElementById('profiles').innerHTML=dataInsert;
+	  });
+	
+	
+}
+
+</script>
+</head>
+<body class="gradient-blue" onload="loadSearchProfiles()">
+	<section class="bt-5">
+		<div class="Container py-5 h-100" style="margin-top:90px">
+			<div class="row justify-content-center align-items-center  h-100">
+				<div class="col-12 col-lg-6 col-xl-4">
+					<div class="card shadow-2-strong card-registration"
+						style="border-radius: 15px;">
+						<div class="card-bovdy p-2 p-md-4">
+							<h3 class="mb-3 pb-2 pb-md-0 mb-md-3">Search Profiles..</h3>
+
+								<div class="row">
+									<div class="col mb-0">
+
+										<div id="profiles">
+											
+										</div>
+
+									</div>
+									
+								</div>
+								
+								
+
+								<!-- <div class="mt-1 pt-0 text-center">
+									<input class="btn btn-primary" type="submit"
+										value="Submit" />
+								</div> -->
+								
+								<div class="mt-1 pt-0 text-center">
+									<h5 style="color:brown">Back to Timeline   <a class="menu-item" href="UserServlet?method=login">Click here..</a></h5>
+								</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+<!-- </form> -->
+</body>
+</html>
